@@ -7,6 +7,7 @@ GO
 
 
 CREATE DATABASE prsdb;
+GO
 
 USE prsdb;
 GO
@@ -65,7 +66,7 @@ CREATE TABLE Request (
 	UserId				int				NOT NULL,
 	Description			varchar(100)	NOT NULL,
 	Justification		varchar(255)	NOT NULL,
-	DateNeeded			date			NOT NULL,
+	DateNeeded			date			NULL,
 	DeliveryMode		varchar(25)		NOT NULL,
 	Status				varchar(20)		NOT NULL DEFAULT 'New',
 	Total				decimal(10,2)	NOT NULL,
@@ -82,7 +83,8 @@ CREATE TABLE LineItem (
 	ProductId		int				NOT NULL,
 	Quantity		int				NOT NULL,
 	FOREIGN KEY		(RequestId)		REFERENCES Request(Id),
-	FOREIGN KEY		(ProductId)		REFERENCES Product(Id)
+	FOREIGN KEY		(ProductId)		REFERENCES Product(Id),
+	CONSTRAINT      UQ_LineItem_Req_Prod UNIQUE (RequestId, ProductId)
 );
 
 
