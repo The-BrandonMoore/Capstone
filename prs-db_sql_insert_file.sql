@@ -65,3 +65,4 @@ INSERT INTO dbo.Request (UserId, Description, Justification, DateNeeded, Deliver
 --Insert Date into the Line Item Table
 INSERT INTO dbo.LineItem (RequestId, ProductId, Quantity)
 	SELECT R.RequestId, P.ProductId, 
+	FROM
