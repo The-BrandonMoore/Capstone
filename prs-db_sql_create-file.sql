@@ -1,71 +1,81 @@
 USE MASTER;
 GO
 
-DROP DATABASE IF EXISTS prs_db;
+
+DROP DATABASE IF EXISTS prsdb;
 GO
 
-CREATE DATABASE prs_db;
 
-USE prs_db;
+CREATE DATABASE prsdb;
+
+USE prsdb;
 GO
 
-CREATE TABLE Users (
+
+-- create "USER" table
+CREATE TABLE [User] (
 	Id				int						PRIMARY KEY IDENTITY(1,1),
-	Username		varchar(255)			NOT NULL,
-	Password		varchar(255)			NOT NULL,
-	FirstName		varchar(50)				NOT NULL,
-	LastName		varchar(50)				NOT NULL,
-	PhoneNumber		varchar(20)				NOT NULL,
-	Email			varchar(100)			NOT NULL,
-	Reviewer		tinyint					NOT NULL,
-	Admin			tinyint					NOT NULL,
-	CONSTRAINT		UQ_Users_Username		UNIQUE (Username),
-	CONSTRAINT		UQ_Users_PhoneNumber	UNIQUE (PhoneNumber),
-	CONSTRAINT		UQ_Users_Email			UNIQUE (Email)
+	Username		varchar(20)				NOT NULL,
+	Password		varchar(10)				NOT NULL,
+	FirstName		varchar(20)				NOT NULL,
+	LastName		varchar(20)				NOT NULL,
+	PhoneNumber		varchar(12)				NOT NULL,
+	Email			varchar(75)				NOT NULL,
+	Reviewer		bit						DEFAULT 0 NOT NULL,
+	Admin			bit						DEFAULT 0 NOT NULL,
+	CONSTRAINT		UQ_User_Username		UNIQUE (Username),
+	CONSTRAINT		UQ_User_Person			UNIQUE (FirstName, LastName, PhoneNumber),
+	CONSTRAINT		UQ_User_Email			UNIQUE (Email)
 );
 
+
+--create "VENDOR" table
 CREATE TABLE Vendor (
 	Id				int						PRIMARY KEY IDENTITY(1,1),
-	Code			varchar(255)			NOT NULL,
+	Code			varchar(10)				NOT NULL,
 	Name			varchar(255)			NOT NULL,
 	Address			varchar(255)			NOT NULL,
-	City			varchar(50)				NOT NULL,
-	State			varchar(25)				NOT NULL,
-	Zip				varchar(9)				NOT NULL,
-	PhoneNumber		varchar(20)				NOT NULL,
+	City			varchar(255)			NOT NULL,
+	State			char(2)					NOT NULL,
+	Zip				char(5)					NOT NULL,
+	PhoneNumber		varchar(12)				NOT NULL,
 	Email			varchar(100)			NOT NULL,
 	CONSTRAINT		UQ_Vendor_Code			UNIQUE (Code),
-	CONSTRAINT		UQ_Vendor_Name			UNIQUE (Name),
-	CONSTRAINT		UQ_Vendor_PhoneNumber	UNIQUE (PhoneNumber),
-	CONSTRAINT		UQ_Vendor_Email			UNIQUE (Email)
+	CONSTRAINT		UQ_Vendor_Business		UNIQUE (Name, Address, City, State)
 );
 
+
+--create "PRODUCT" table
+CREATE TABLE Product (
+	Id				int						PRIMARY KEY IDENTITY(1,1),
+	VendorId		int						NOT NULL,
+	PartNumber		varchar(50)				NOT NULL,
+	Name			varchar(150)			NOT NULL,
+	Price			decimal(10,2)			NOT NULL,
+	Unit			varchar(255)			NULL,
+	PhotoPath		varchar(255)			NULL,
+	CONSTRAINT		UQ_Product_PartNumber	UNIQUE (VendorId, PartNumber),
+	FOREIGN KEY		(VendorId)				REFERENCES Vendor(Id)
+);
+
+
+--create "REQUEST" table
 CREATE TABLE Request (
 	Id					int				PRIMARY KEY IDENTITY(1,1),
 	UserId				int				NOT NULL,
-	Description			varchar(255)	NOT NULL,
+	Description			varchar(100)	NOT NULL,
 	Justification		varchar(255)	NOT NULL,
-	DateNeeded			varchar(50)		NOT NULL,
+	DateNeeded			date			NOT NULL,
 	DeliveryMode		varchar(25)		NOT NULL,
-	Status				varchar(9)		NOT NULL,
-	Total				int				NOT NULL,
-	SubmittedDate		date			NOT NULL,
-	ReasonForRejection	varchar(255)	NOT NULL,
-	FOREIGN KEY			(UserId)		REFERENCES Users(Id)
+	Status				varchar(20)		NOT NULL DEFAULT 'New',
+	Total				decimal(10,2)	NOT NULL,
+	SubmittedDate		datetime		DEFAULT current_timestamp NOT NULL,
+	ReasonForRejection	varchar(100)	NULL,
+	FOREIGN KEY			(UserId)		REFERENCES [User](Id)
 );
 
-CREATE TABLE Product (
-	Id					int						PRIMARY KEY IDENTITY(1,1),
-	VendorId			int						NOT NULL,
-	PartNumber			varchar(255)			NOT NULL,
-	Name				varchar(255)			NOT NULL,
-	Price				int						NOT NULL,
-	Unit				varchar(25)				NOT NULL,
-	Status				varchar(9)				NOT NULL,
-	CONSTRAINT			UQ_Product_PartNumber	UNIQUE (PartNumber),
-	FOREIGN KEY			(VendorId)				REFERENCES Vendor(Id)
-);
 
+--create "LINEITEM" table
 CREATE TABLE LineItem (
 	Id				int				PRIMARY KEY IDENTITY(1,1),
 	RequestId		int				NOT NULL,
