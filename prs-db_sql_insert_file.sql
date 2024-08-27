@@ -3,7 +3,7 @@ GO
 
 --Insert data into User table
 
-INSERT INTO dbo.User (Username, Password, FirstName, LastName, PhoneNumber, Email, Reviewer, Admin)
+INSERT INTO dbo.[User] (Username, Password, FirstName, LastName, PhoneNumber, Email, Reviewer, Admin)
 VALUES
 	('BMoore', 'TestPass',	'Brandon',	'Moore', '740-555-8191', 'email@email.com',				1, 1),
 	('MMoore', 'Pass123',	'Megan',	'Moore', '740-882-9002', 'wife''semail@heremail.com',	1, 0),
@@ -37,10 +37,10 @@ VALUES
 	(3, 'HC232',	'Holy Land Anointing Oil',					14.99,		NULL,		NULL),
 	(4, 'DA0031',	'Faith-Based T-Shirt',						19.99,		NULL,		NULL),
 	(4, 'DA34002',	'Inspirational Hoodie',						34.99,		NULL,		NULL),
-	(5, 'FJ77701',	'Cross Necklace',							49.99,		NULL,		NULL),
-	(5, 'FJ0dd02',	'Faith Bracelet',							24.99,		NULL,		NULL),
-	(6, 'CC0041',	'Bible Verse Plaque',						14.99,		NULL,		NULL),
-	(6, 'CC3452',	'Religious Gift Box Set',					39.99,		NULL,		NULL),
+	(5, '9877701',	'Cross Necklace',							49.99,		NULL,		NULL),
+	(5, '990dd02',	'Faith Bracelet',							24.99,		NULL,		NULL),
+	(6, '4480041',	'Bible Verse Plaque',						14.99,		NULL,		NULL),
+	(6, '3394452',	'Religious Gift Box Set',					39.99,		NULL,		NULL),
 	(7, 'SJ4941',	'Menorah',									59.99,		NULL,		NULL),
 	(7, 'SJ9332',	'Star of David Pendant',					79.99,		NULL,		NULL),
 	(8, 'ICP001',	'Christian Inspirational Book',				12.99,		NULL,		NULL),

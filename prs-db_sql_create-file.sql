@@ -64,6 +64,7 @@ CREATE TABLE Product (
 CREATE TABLE Request (
 	Id					int				PRIMARY KEY IDENTITY(1,1),
 	UserId				int				NOT NULL,
+	RequestNumber		varchar(20)		NOT NULL,
 	Description			varchar(100)	NOT NULL,
 	Justification		varchar(255)	NOT NULL,
 	DateNeeded			date			NULL,
@@ -72,7 +73,8 @@ CREATE TABLE Request (
 	Total				decimal(10,2)	NOT NULL,
 	SubmittedDate		datetime		DEFAULT current_timestamp NOT NULL,
 	ReasonForRejection	varchar(100)	NULL,
-	FOREIGN KEY			(UserId)		REFERENCES [User](Id)
+	FOREIGN KEY			(UserId)				REFERENCES [User](Id),
+	CONSTRAINT			UQ_Product_Req_Num		UNIQUE (RequestNumber)
 );
 
 
