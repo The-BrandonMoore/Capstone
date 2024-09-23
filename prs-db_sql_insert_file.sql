@@ -47,8 +47,8 @@ VALUES
 	(8, 'ICP002',	'Faith-Based Children\''s Storybook',		7.99,		NULL,		NULL),
 	(9, 'GBT001',	'Holy Land Tour Package',					1599.00,	'Package',	NULL),
 	(9, 'GBT002',	'Pilgrimage to Jerusalem',					2299.00,	'Package',	NULL),
-	(10, 'PMS001',	'Christian DVD Set',						29.99,		NULL,		NULL),
-	(10, 'PMS002',	'Religious Podcast Subscription',			5.99,		'Monthly',	NULL)
+	(10, '9330901',	'Christian DVD Set',						29.99,		NULL,		NULL),
+	(10, '9440002',	'Religious Podcast Subscription',			5.99,		'Monthly',	NULL)
 ;
 
 
