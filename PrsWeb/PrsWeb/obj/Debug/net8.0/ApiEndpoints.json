@@ -327,6 +327,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "PrsWeb.Controllers.RequestsController",
+    "Method": "GetLineItemsForRequestId",
+    "RelativePath": "api/Requests/requests/{requestId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[PrsWeb.Models.LineItem, PrsWeb, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "PrsWeb.Controllers.UsersController",
     "Method": "GetUsers",
     "RelativePath": "api/Users",

@@ -15,6 +15,7 @@ namespace PrsWeb.Controllers
     [ApiController]
     public class RequestsController : ControllerBase
     {
+        
         private readonly PrsDBContext _context;
 
         public RequestsController(PrsDBContext context)
@@ -81,7 +82,7 @@ namespace PrsWeb.Controllers
         {
             request.SubmittedDate = DateTime.Now;
             request.Total = 0.0m;
-            request.Status = "New";
+            request.Status = "NEW";
             _context.Requests.Add(request);
             await _context.SaveChangesAsync();
 
@@ -108,5 +109,89 @@ namespace PrsWeb.Controllers
         {
             return _context.Requests.Any(e => e.Id == id);
         }
+
+        //get all line items with the same request ID number
+        [HttpGet("requests/{requestId}")]
+        public async Task<ActionResult<IEnumerable<LineItem>>>
+            GetLineItemsForRequestId(int requestId)
+        {
+            var lineitems = await _context.LineItems.Include(i => i.Request)
+                .Include(i => i.Product)
+                .Where(i => i.RequestId == requestId)
+                .ToListAsync();
+            return lineitems;
+        }
+
+        //Request Submitted for Review
+        [HttpPut("request/submit")]
+        public async Task<IActionResult> SubmitForReviewRequest(int id, Request request)
+        {
+            _context.Entry(request).State = EntityState.Modified;
+            if (request.Total > 50)
+            {
+                request.Status = "APPROVED";
+                await _context.SaveChangesAsync();
+                return NoContent();
+            }
+            else
+            {
+                request.Status = "REVIEW";
+                await _context.SaveChangesAsync();
+                return NoContent();
+            }
+        }
+
+        //Get all requests for review meeting criteria
+        [HttpGet("request/review/{id}")]
+        public async Task<ActionResult<IEnumerable<Request>>> GetRequestsForReview(int id)
+        {
+            var requstsReview = await _context.Requests.
+                Where(r => r.Status == "REVIEW").
+                Where(r => r.UserId != id)
+                .ToListAsync();
+            return requstsReview;
+        }
+
+        //Request Approve
+        [HttpPut("request/approved")]
+        public async Task<IActionResult> RequestApproved(int id, Request request)
+        {
+            _context.Entry(request).State = EntityState.Modified;
+            request.Status = "APPROVED";
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        //Request Rejected
+        [HttpPut("request/rejected")]
+        public async Task<IActionResult> RequestDenied(int id, Request request)
+        {
+            _context.Entry(request).State = EntityState.Modified;
+            request.Status = "REJECTED";
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        //Method to Recalculate the request total when Line Items Add/Delete/Update
+        [HttpPut("request/recalculate")]
+        public async Task<ActionResult<Request>>
+            RecalculateRequestsAfterLineItemChange(Request request, int id)
+        {
+
+            var lineItemResult = await GetLineItemsForRequestId(id);
+            var lineItems = lineItemResult.Value.ToList();
+
+            decimal totalCounter = 0m;
+            for (int i = 0; i < lineItems.Count; i++)
+            {
+                totalCounter += lineItems[i].Product.Price * lineItems[i].Quantity;
+            }
+            request.Total = totalCounter;
+            _context.Requests.Update(request);
+            await _context.SaveChangesAsync();
+
+            return Ok(request);
+        }
+
     }
 }

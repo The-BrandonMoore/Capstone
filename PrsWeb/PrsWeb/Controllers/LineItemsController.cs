@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PrsWeb.Models;
+using PrsWeb.Controllers;
 
 namespace PrsWeb.Controllers
 {
@@ -46,6 +42,7 @@ namespace PrsWeb.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutLineItem(int id, LineItem lineItem)
         {
+            
             if (id != lineItem.Id)
             {
                 return BadRequest();
@@ -103,5 +100,27 @@ namespace PrsWeb.Controllers
         {
             return _context.LineItems.Any(e => e.Id == id);
         }
+
+        //Method to Recalculate the request total when Line Items Add/Delete/Update
+        //public async Task<ActionResult<Request>>
+        //    RecalculateRequestsAfterLineItemChange(Request request, int id)
+        //{
+
+        //    List<LineItem> lineItems = await RequestController.GetLineItemsForRequestId(id);
+        //    decimal totalCounter = 0m;
+        //    for (int i = 0; i < lineItems.Count; i++)
+        //    {
+        //        totalCounter = lineItems[i].Product.Price * decimal.Parse(lineItems[i].Product.Unit);
+        //    }
+
+        //    request.Total = totalCounter;
+
+        //    return request;
+        //}
+
+
+    
+
+
     }
 }
