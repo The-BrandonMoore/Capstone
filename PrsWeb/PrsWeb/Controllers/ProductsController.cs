@@ -48,7 +48,7 @@ namespace PrsWeb.Controllers
         {
             if (id != product.Id)
             {
-                return BadRequest();
+                return NotFound();
             }
 
             _context.Entry(product).State = EntityState.Modified;

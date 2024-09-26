@@ -43,7 +43,7 @@ namespace PrsWeb.Controllers
         {
             if (id != vendor.Id)
             {
-                return BadRequest();
+                return NotFound();
             }
 
             _context.Entry(vendor).State = EntityState.Modified;

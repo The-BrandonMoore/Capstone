@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace PrsWeb.Models;
 
@@ -19,6 +20,8 @@ public partial class LineItem
 
     public int Quantity { get; set; }
 
+
+    [JsonIgnore]
     [ForeignKey("ProductId")]
     [InverseProperty("LineItems")]
     public virtual Product? Product { get; set; } = null!;

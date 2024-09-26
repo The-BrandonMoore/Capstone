@@ -15,14 +15,14 @@ namespace PrsWeb.Controllers
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Users  SEAN'S MAPPING: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await _context.Users.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/Users/5  SEANS MAPPING: api/Users/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
@@ -36,14 +36,14 @@ namespace PrsWeb.Controllers
             return user;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Users/5  SEANS MAPPING: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        [HttpPut]
+        public async Task<IActionResult> PutUser(User user)
         {
-            if (id != user.Id)
+            if (user == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
             _context.Entry(user).State = EntityState.Modified;
@@ -54,7 +54,7 @@ namespace PrsWeb.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!UserExists(user.Id))
                 {
                     return NotFound();
                 }
@@ -67,7 +67,7 @@ namespace PrsWeb.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Users  SEANS MAPPING: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
@@ -78,7 +78,7 @@ namespace PrsWeb.Controllers
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Users/5   SEANS MAPPING: api/Users/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
@@ -99,8 +99,20 @@ namespace PrsWeb.Controllers
             return _context.Users.Any(e => e.Id == id);
         }
         //Login 
-        //[HttpPost]
+        [HttpPost("login")]
+        public async Task<ActionResult<User>> Login(UserLogin userLogin)
+        {
+            var user = await _context.Users
+                .Where(u => u.Username == userLogin.UserName)
+                .Where(u => u.Password == userLogin.Password)
+                .FirstOrDefaultAsync();
+            if (user == null)
+            {
+                return NotFound();
+            }
 
+            return user;
+        }
 
     }
 }

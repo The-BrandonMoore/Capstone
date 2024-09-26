@@ -31,6 +31,11 @@
         "Name": "lineItem",
         "Type": "PrsWeb.Models.LineItem",
         "IsRequired": true
+      },
+      {
+        "Name": "requestId",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -107,6 +112,32 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PrsWeb.Controllers.LineItemsController",
+    "Method": "GetLineItemsForRequestId",
+    "RelativePath": "api/LineItems/lines-for-req/{requestId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[PrsWeb.Models.LineItem, PrsWeb, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "PrsWeb.Controllers.ProductsController",
@@ -328,21 +359,109 @@
   },
   {
     "ContainingType": "PrsWeb.Controllers.RequestsController",
-    "Method": "GetLineItemsForRequestId",
-    "RelativePath": "api/Requests/requests/{requestId}",
-    "HttpMethod": "GET",
+    "Method": "RequestApproved",
+    "RelativePath": "api/Requests/approve/{id}",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "requestId",
+        "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[PrsWeb.Models.LineItem, PrsWeb, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "PrsWeb.Models.Request",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "PrsWeb.Controllers.RequestsController",
+    "Method": "GetRequestsForReview",
+    "RelativePath": "api/Requests/list-review/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[PrsWeb.Models.Request, PrsWeb, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "PrsWeb.Controllers.RequestsController",
+    "Method": "RequestDenied",
+    "RelativePath": "api/Requests/reject/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "reasonForRejection",
+        "Type": "System.Object",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PrsWeb.Models.Request",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "PrsWeb.Controllers.RequestsController",
+    "Method": "SubmitForReviewRequest",
+    "RelativePath": "api/Requests/submit-review/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "PrsWeb.Models.Request",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PrsWeb.Models.Request",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -371,6 +490,22 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "PrsWeb.Controllers.UsersController",
+    "Method": "PutUser",
+    "RelativePath": "api/Users",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "PrsWeb.Models.User",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "PrsWeb.Controllers.UsersController",
@@ -426,27 +561,6 @@
   },
   {
     "ContainingType": "PrsWeb.Controllers.UsersController",
-    "Method": "PutUser",
-    "RelativePath": "api/Users/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "user",
-        "Type": "PrsWeb.Models.User",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "PrsWeb.Controllers.UsersController",
     "Method": "DeleteUser",
     "RelativePath": "api/Users/{id}",
     "HttpMethod": "DELETE",
@@ -460,6 +574,32 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PrsWeb.Controllers.UsersController",
+    "Method": "Login",
+    "RelativePath": "api/Users/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userLogin",
+        "Type": "PrsWeb.Models.UserLogin",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PrsWeb.Models.User",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "PrsWeb.Controllers.VendorsController",

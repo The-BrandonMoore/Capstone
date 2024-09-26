@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace PrsWeb.Models;
@@ -34,6 +35,7 @@ public partial class Product
     [Unicode(false)]
     public string? PhotoPath { get; set; }
 
+    [JsonIgnore]
     [InverseProperty("Product")]
     public virtual ICollection<LineItem> LineItems { get; set; } = new List<LineItem>();
 

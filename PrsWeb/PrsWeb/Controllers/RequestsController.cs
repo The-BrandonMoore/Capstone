@@ -15,7 +15,7 @@ namespace PrsWeb.Controllers
     [ApiController]
     public class RequestsController : ControllerBase
     {
-        
+
         private readonly PrsDBContext _context;
 
         public RequestsController(PrsDBContext context)
@@ -23,7 +23,7 @@ namespace PrsWeb.Controllers
             _context = context;
         }
 
-        // GET: api/Requests
+        // GET: api/Requests/
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Request>>> GetRequests()
         {
@@ -44,14 +44,14 @@ namespace PrsWeb.Controllers
             return request;
         }
 
-        // PUT: api/Requests/5
+        // PUT: api/Requests
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRequest(int id, Request request)
         {
             if (id != request.Id)
             {
-                return BadRequest();
+                return NotFound();
             }
 
             _context.Entry(request).State = EntityState.Modified;
@@ -80,6 +80,8 @@ namespace PrsWeb.Controllers
         [HttpPost]
         public async Task<ActionResult<Request>> PostRequest(Request request)
         {
+            request.UserId = 3;
+            request.RequestNumber = "1803";
             request.SubmittedDate = DateTime.Now;
             request.Total = 0.0m;
             request.Status = "NEW";
@@ -110,88 +112,97 @@ namespace PrsWeb.Controllers
             return _context.Requests.Any(e => e.Id == id);
         }
 
-        //get all line items with the same request ID number
-        [HttpGet("requests/{requestId}")]
-        public async Task<ActionResult<IEnumerable<LineItem>>>
-            GetLineItemsForRequestId(int requestId)
-        {
-            var lineitems = await _context.LineItems.Include(i => i.Request)
-                .Include(i => i.Product)
-                .Where(i => i.RequestId == requestId)
-                .ToListAsync();
-            return lineitems;
-        }
+        //get all line items with the same request ID number    
+        //[HttpGet("requests/{requestId}")]
+        //public async Task<ActionResult<IEnumerable<LineItem>>>
+        //    GetLineItemsForRequestId(int requestId)
+        //{
+        //    var lineitems = await _context.LineItems.Include(i => i.Request)
+        //        .Include(i => i.Product)
+        //        .Where(i => i.RequestId == requestId)
+        //        .ToListAsync();
+        //    return lineitems;
+        //}
 
-        //Request Submitted for Review
-        [HttpPut("request/submit")]
-        public async Task<IActionResult> SubmitForReviewRequest(int id, Request request)
+        //Request Submitted for Review TR6
+        [HttpPut("submit-review/{id}")]
+        public async Task<ActionResult<Request>> SubmitForReviewRequest(int id, Request request)
         {
             _context.Entry(request).State = EntityState.Modified;
-            if (request.Total > 50)
+            if (request.Total <= 50)
             {
-                request.Status = "APPROVED";
+                request.Status = "APPROVED"; 
+                request.SubmittedDate = DateTime.Now;
                 await _context.SaveChangesAsync();
-                return NoContent();
+                return request;
             }
             else
             {
                 request.Status = "REVIEW";
+                request.SubmittedDate = DateTime.Now;
                 await _context.SaveChangesAsync();
-                return NoContent();
+                return request;
             }
         }
 
-        //Get all requests for review meeting criteria
-        [HttpGet("request/review/{id}")]
-        public async Task<ActionResult<IEnumerable<Request>>> GetRequestsForReview(int id)
+        //Get all requests for review meeting criteria TR7
+        [HttpGet("list-review/{userId}")]
+        public async Task<ActionResult<IEnumerable<Request>>> GetRequestsForReview(int userId)
         {
             var requstsReview = await _context.Requests.
                 Where(r => r.Status == "REVIEW").
-                Where(r => r.UserId != id)
+                Where(r => r.UserId != userId)
                 .ToListAsync();
             return requstsReview;
         }
 
-        //Request Approve
-        [HttpPut("request/approved")]
-        public async Task<IActionResult> RequestApproved(int id, Request request)
+        //Request Approve TR11
+        [HttpPut("approve/{id}")]
+        public async Task<ActionResult<Request>> RequestApproved(int id)
         {
+            var result = await GetRequest(id);
+            Request request = result.Value;
             _context.Entry(request).State = EntityState.Modified;
             request.Status = "APPROVED";
             await _context.SaveChangesAsync();
-            return NoContent();
+            return request;
         }
 
-        //Request Rejected
-        [HttpPut("request/rejected")]
-        public async Task<IActionResult> RequestDenied(int id, Request request)
+        //Request Rejected TR12
+        [HttpPut("reject/{id}")]
+        public async Task<ActionResult<Request>> RequestDenied(int id, object reasonForRejection)
         {
+            var result = await GetRequest(id);
+            Request request = result.Value;
             _context.Entry(request).State = EntityState.Modified;
             request.Status = "REJECTED";
+            string reason = System.Text.Json.JsonSerializer.Serialize(reasonForRejection);
+            request.ReasonForRejection = reason;
             await _context.SaveChangesAsync();
-            return NoContent();
+            return request;
         }
 
         //Method to Recalculate the request total when Line Items Add/Delete/Update
-        [HttpPut("request/recalculate")]
-        public async Task<ActionResult<Request>>
-            RecalculateRequestsAfterLineItemChange(Request request, int id)
-        {
+        //[HttpPut("request/recalculate")]
+        //public async Task<ActionResult<Request>>
+        //    RecalculateRequestsAfterLineItemChange(int requestId)
+        //{
+        //    var requestResult = await GetRequest(requestId); // gets the request we are recalculating
+        //    Request request = requestResult.Value; //changes the var type to a Request type
 
-            var lineItemResult = await GetLineItemsForRequestId(id);
-            var lineItems = lineItemResult.Value.ToList();
+        //    var lineItemResult = await GetLineItemsForRequestId(requestId); //returns lineitems for requestID
+        //    var lineItems = lineItemResult.Value.ToList();//sends lineItems to a list
+        //    decimal totalCounter = 0m;
+        //    foreach (var lineItem in lineItems)//loops through the list and adds the total price of each line item to the total counter
+        //    {
+        //        totalCounter += lineItem.Product.Price * lineItem.Quantity;
+        //    }
+        //    request.Total = totalCounter;
+        //    _context.Requests.Update(request);
+        //    await _context.SaveChangesAsync();
 
-            decimal totalCounter = 0m;
-            for (int i = 0; i < lineItems.Count; i++)
-            {
-                totalCounter += lineItems[i].Product.Price * lineItems[i].Quantity;
-            }
-            request.Total = totalCounter;
-            _context.Requests.Update(request);
-            await _context.SaveChangesAsync();
-
-            return Ok(request);
-        }
+        //    return Ok(request);
+        //}
 
     }
 }

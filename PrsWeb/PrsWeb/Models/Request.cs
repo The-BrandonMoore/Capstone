@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace PrsWeb.Models;
@@ -17,7 +18,7 @@ public partial class Request
 
     [StringLength(20)]
     [Unicode(false)]
-    public string RequestNumber { get; set; } = null!;
+    public string? RequestNumber { get; set; } = null!;
 
     [StringLength(100)]
     [Unicode(false)]
@@ -27,7 +28,7 @@ public partial class Request
     [Unicode(false)]
     public string Justification { get; set; } = null!;
 
-    public DateOnly? DateNeeded { get; set; }
+    public DateOnly DateNeeded { get; set; }
 
     [StringLength(25)]
     [Unicode(false)]
@@ -47,6 +48,7 @@ public partial class Request
     [Unicode(false)]
     public string? ReasonForRejection { get; set; }
 
+    [JsonIgnore]
     [InverseProperty("Request")]
     public virtual ICollection<LineItem> LineItems { get; set; } = new List<LineItem>();
 
