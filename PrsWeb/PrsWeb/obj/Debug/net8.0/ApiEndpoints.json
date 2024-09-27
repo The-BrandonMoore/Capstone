@@ -277,8 +277,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "PrsWeb.Models.Request",
+        "Name": "requestForm",
+        "Type": "PrsWeb.Models.RequestForm",
         "IsRequired": true
       }
     ],
@@ -493,22 +493,6 @@
   },
   {
     "ContainingType": "PrsWeb.Controllers.UsersController",
-    "Method": "PutUser",
-    "RelativePath": "api/Users",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "user",
-        "Type": "PrsWeb.Models.User",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "PrsWeb.Controllers.UsersController",
     "Method": "PostUser",
     "RelativePath": "api/Users",
     "HttpMethod": "POST",
@@ -558,6 +542,27 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "PrsWeb.Controllers.UsersController",
+    "Method": "PutUser",
+    "RelativePath": "api/Users/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "user",
+        "Type": "PrsWeb.Models.User",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "PrsWeb.Controllers.UsersController",

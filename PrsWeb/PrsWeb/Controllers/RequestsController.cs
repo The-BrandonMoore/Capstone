@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PrsWeb.Models;
+using System.Diagnostics.Metrics;
+using System.Text;
+using Request = PrsWeb.Models.Request;
 
 
 namespace PrsWeb.Controllers
@@ -72,13 +76,27 @@ namespace PrsWeb.Controllers
         // POST: api/Requests       REQUIRED MAPPING: api/Requests
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Request>> PostRequest(Request request)
+        public async Task<ActionResult<Request>> PostRequest(RequestForm requestForm)
         {
-            request.UserId = 3;
-            request.RequestNumber = "1803";
-            request.SubmittedDate = DateTime.Now;
-            request.Total = 0.0m;
-            request.Status = "NEW";
+
+            Request request = new Request {
+                UserId = requestForm.UserId,
+                Description = requestForm.Description,
+                Justification = requestForm.Justification,
+                DateNeeded = requestForm.DateNeeded,
+                DeliveryMode = requestForm.DeliveryMode,
+                SubmittedDate = DateTime.Now,
+                Status = "NEW",
+                Total = 0.0m
+            };
+
+            string lastRequest = _context.Requests.Max(r => r.RequestNumber);
+
+            int lastFour = int.Parse(lastRequest.Substring(7)) +1;
+            StringBuilder requestNumberStr = new();
+            string dateStr = DateTime.Now.ToString("yyMMdd");
+            request.RequestNumber = requestNumberStr.Append("R" + dateStr + lastFour.ToString().PadLeft(4, '0')).ToString();
+
             _context.Requests.Add(request);
             await _context.SaveChangesAsync();
 
