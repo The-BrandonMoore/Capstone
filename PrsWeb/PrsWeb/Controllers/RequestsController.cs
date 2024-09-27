@@ -1,8 +1,6 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PrsWeb.Models;
-using System.Diagnostics.Metrics;
 using System.Text;
 using Request = PrsWeb.Models.Request;
 
@@ -78,8 +76,8 @@ namespace PrsWeb.Controllers
         [HttpPost]
         public async Task<ActionResult<Request>> PostRequest(RequestForm requestForm)
         {
-
-            Request request = new Request {
+            Request request = new Request
+            {
                 UserId = requestForm.UserId,
                 Description = requestForm.Description,
                 Justification = requestForm.Justification,
@@ -90,13 +88,14 @@ namespace PrsWeb.Controllers
                 Total = 0.0m
             };
 
+            //makes the new request number
             string lastRequest = _context.Requests.Max(r => r.RequestNumber);
-
-            int lastFour = int.Parse(lastRequest.Substring(7)) +1;
+            int lastFour = int.Parse(lastRequest.Substring(7)) + 1;
             StringBuilder requestNumberStr = new();
             string dateStr = DateTime.Now.ToString("yyMMdd");
             request.RequestNumber = requestNumberStr.Append("R" + dateStr + lastFour.ToString().PadLeft(4, '0')).ToString();
 
+            //adds and saves the new request
             _context.Requests.Add(request);
             await _context.SaveChangesAsync();
 

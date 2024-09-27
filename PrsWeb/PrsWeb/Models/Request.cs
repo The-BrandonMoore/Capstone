@@ -18,7 +18,7 @@ public partial class Request
 
     [StringLength(20)]
     [Unicode(false)]
-    public string? RequestNumber { get; set; } = null!;
+    public string RequestNumber { get; set; } = null!;
 
     [StringLength(100)]
     [Unicode(false)]
@@ -36,7 +36,7 @@ public partial class Request
 
     [StringLength(20)]
     [Unicode(false)]
-    public string? Status { get; set; } = null!;
+    public string Status { get; set; } = null!;
 
     [Column(TypeName = "decimal(10, 2)")]
     public decimal Total { get; set; }
