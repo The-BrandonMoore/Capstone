@@ -36,12 +36,12 @@ namespace PrsWeb.Controllers
             return user;
         }
 
-        // PUT: api/Users/5  SEANS MAPPING: api/Users
+        // PUT: api/Users/5  SEANS MAPPING: api/Users/{id}
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut]
-        public async Task<IActionResult> PutUser(User user)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutUser(int id, User user)
         {
-            if (user == null)
+            if (id != user.Id)
             {
                 return NotFound();
             }
