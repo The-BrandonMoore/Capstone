@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PrsWeb.Models;
-using System.Security.Claims;
 
 
 namespace PrsWeb.Controllers
@@ -23,14 +17,14 @@ namespace PrsWeb.Controllers
             _context = context;
         }
 
-        // GET: api/Requests/
+        // GET: api/Requests/    REQUIRED MAPPING: api/Requests
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Request>>> GetRequests()
         {
             return await _context.Requests.ToListAsync();
         }
 
-        // GET: api/Requests/5
+        // GET: api/Requests/5     REQUIRED MAPPING: api/Requests/id
         [HttpGet("{id}")]
         public async Task<ActionResult<Request>> GetRequest(int id)
         {
@@ -44,7 +38,7 @@ namespace PrsWeb.Controllers
             return request;
         }
 
-        // PUT: api/Requests
+        // PUT: api/Requests     REQUIRED MAPPING: api/Requests/id
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRequest(int id, Request request)
@@ -75,7 +69,7 @@ namespace PrsWeb.Controllers
             return NoContent();
         }
 
-        // POST: api/Requests
+        // POST: api/Requests       REQUIRED MAPPING: api/Requests
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Request>> PostRequest(Request request)
@@ -91,7 +85,7 @@ namespace PrsWeb.Controllers
             return CreatedAtAction("GetRequest", new { id = request.Id }, request);
         }
 
-        // DELETE: api/Requests/5
+        // DELETE: api/Requests/5     REQUIRED MAPPING: api/Requests/id
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRequest(int id)
         {
@@ -112,26 +106,14 @@ namespace PrsWeb.Controllers
             return _context.Requests.Any(e => e.Id == id);
         }
 
-        //get all line items with the same request ID number    
-        //[HttpGet("requests/{requestId}")]
-        //public async Task<ActionResult<IEnumerable<LineItem>>>
-        //    GetLineItemsForRequestId(int requestId)
-        //{
-        //    var lineitems = await _context.LineItems.Include(i => i.Request)
-        //        .Include(i => i.Product)
-        //        .Where(i => i.RequestId == requestId)
-        //        .ToListAsync();
-        //    return lineitems;
-        //}
-
-        //Request Submitted for Review TR6
+        // submit a request for review      REQUIRED MAPPING: api/Requests/submit-review/{id}
         [HttpPut("submit-review/{id}")]
         public async Task<ActionResult<Request>> SubmitForReviewRequest(int id, Request request)
         {
             _context.Entry(request).State = EntityState.Modified;
             if (request.Total <= 50)
             {
-                request.Status = "APPROVED"; 
+                request.Status = "APPROVED";
                 request.SubmittedDate = DateTime.Now;
                 await _context.SaveChangesAsync();
                 return request;
@@ -145,7 +127,7 @@ namespace PrsWeb.Controllers
             }
         }
 
-        //Get all requests for review meeting criteria TR7
+        //Get all requests for review meeting criteria TR7     REQUIRED MAPPING: api/Requests/list-review/{userId}
         [HttpGet("list-review/{userId}")]
         public async Task<ActionResult<IEnumerable<Request>>> GetRequestsForReview(int userId)
         {
@@ -156,7 +138,8 @@ namespace PrsWeb.Controllers
             return requstsReview;
         }
 
-        //Request Approve TR11
+
+        //Request Approve TR11      REQUIRED MAPPING: api/Requests/approve/{id}
         [HttpPut("approve/{id}")]
         public async Task<ActionResult<Request>> RequestApproved(int id)
         {
@@ -168,7 +151,7 @@ namespace PrsWeb.Controllers
             return request;
         }
 
-        //Request Rejected TR12
+        //Request Rejected TR12      REQUIRED MAPPING: api/Requests/reject/{id}
         [HttpPut("reject/{id}")]
         public async Task<ActionResult<Request>> RequestDenied(int id, object reasonForRejection)
         {
@@ -181,28 +164,5 @@ namespace PrsWeb.Controllers
             await _context.SaveChangesAsync();
             return request;
         }
-
-        //Method to Recalculate the request total when Line Items Add/Delete/Update
-        //[HttpPut("request/recalculate")]
-        //public async Task<ActionResult<Request>>
-        //    RecalculateRequestsAfterLineItemChange(int requestId)
-        //{
-        //    var requestResult = await GetRequest(requestId); // gets the request we are recalculating
-        //    Request request = requestResult.Value; //changes the var type to a Request type
-
-        //    var lineItemResult = await GetLineItemsForRequestId(requestId); //returns lineitems for requestID
-        //    var lineItems = lineItemResult.Value.ToList();//sends lineItems to a list
-        //    decimal totalCounter = 0m;
-        //    foreach (var lineItem in lineItems)//loops through the list and adds the total price of each line item to the total counter
-        //    {
-        //        totalCounter += lineItem.Product.Price * lineItem.Quantity;
-        //    }
-        //    request.Total = totalCounter;
-        //    _context.Requests.Update(request);
-        //    await _context.SaveChangesAsync();
-
-        //    return Ok(request);
-        //}
-
     }
 }

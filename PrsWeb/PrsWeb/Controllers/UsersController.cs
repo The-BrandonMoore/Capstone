@@ -15,14 +15,14 @@ namespace PrsWeb.Controllers
             _context = context;
         }
 
-        // GET: api/Users  SEAN'S MAPPING: api/Users
+        // GET: api/Users  REQUIRED MAPPING: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await _context.Users.ToListAsync();
         }
 
-        // GET: api/Users/5  SEANS MAPPING: api/Users/{id}
+        // GET: api/Users/5  REQUIRED MAPPING: api/Users/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
@@ -36,7 +36,7 @@ namespace PrsWeb.Controllers
             return user;
         }
 
-        // PUT: api/Users/5  SEANS MAPPING: api/Users/{id}
+        // PUT: api/Users/5  REQUIRED MAPPING: api/Users/{id}
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
@@ -67,7 +67,7 @@ namespace PrsWeb.Controllers
             return NoContent();
         }
 
-        // POST: api/Users  SEANS MAPPING: api/Users
+        // POST: api/Users  REQUIRED MAPPING: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
@@ -78,7 +78,7 @@ namespace PrsWeb.Controllers
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
-        // DELETE: api/Users/5   SEANS MAPPING: api/Users/{id}
+        // DELETE: api/Users/5   REQUIRED MAPPING: api/Users/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
@@ -98,7 +98,7 @@ namespace PrsWeb.Controllers
         {
             return _context.Users.Any(e => e.Id == id);
         }
-        //Login 
+        //Login             REQUIRED MAPPING: api/Users/login
         [HttpPost("login")]
         public async Task<ActionResult<User>> Login(UserLogin userLogin)
         {

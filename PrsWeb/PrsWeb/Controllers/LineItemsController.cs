@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PrsWeb.Models;
-using Azure.Core;
 
 namespace PrsWeb.Controllers
 {
@@ -16,14 +15,14 @@ namespace PrsWeb.Controllers
             _context = context;
         }
 
-        // GET: api/LineItems I AM KEEPING THIS FOR TESTING PURPOSES
+        // GET: api/LineItems     I AM KEEPING THIS FOR TESTING PURPOSES
         [HttpGet]
         public async Task<ActionResult<IEnumerable<LineItem>>> GetLineItems()
         {
             return await _context.LineItems.ToListAsync();
         }
 
-        // GET: api/LineItems/5
+        // GET: api/LineItems/5     REQUIRED MAPPING: api/LineItems/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<LineItem>> GetLineItem(int id)
         {
@@ -37,7 +36,7 @@ namespace PrsWeb.Controllers
             return lineItem;
         }
 
-        // PUT: api/LineItems/5 TR5
+        // PUT: api/LineItems/5 TR5       REQUIRED MAPPING: api/LineItems/{id}
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutLineItem(int id, LineItem lineItem)
@@ -53,7 +52,7 @@ namespace PrsWeb.Controllers
                 .Include(r => r.LineItems)  // Load LineItems for the Request
                     .ThenInclude(li => li.Product)  // For each LineItem, load the Product
                     .FirstOrDefaultAsync(r => r.Id == lineItem.RequestId);// Find the specific Request by RequestId
-          
+
 
             try
             {
@@ -68,7 +67,7 @@ namespace PrsWeb.Controllers
                 //update the request with the new price
                 _context.Requests.Update(request);
                 await _context.SaveChangesAsync();
-              
+
                 return NoContent();
             }
             catch (DbUpdateConcurrencyException)
@@ -85,7 +84,7 @@ namespace PrsWeb.Controllers
 
         }
 
-        // POST: api/LineItems  TR5 
+        // POST: api/LineItems  TR5      REQUIRED MAPPING: api/LineItems
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<LineItem>> PostLineItem(LineItem lineItem, int requestId)
@@ -98,7 +97,7 @@ namespace PrsWeb.Controllers
                 .Include(r => r.LineItems)
                 .ThenInclude(li => li.Product)
                 .FirstOrDefaultAsync(r => r.Id == lineItem.RequestId);
-            
+
             //recalculate request total
             decimal totalCounter = 0m;
             foreach (var item in request.LineItems)
@@ -114,7 +113,7 @@ namespace PrsWeb.Controllers
             return lineItem;
         }
 
-        // DELETE: api/LineItems/5
+        // DELETE: api/LineItems/5          REQUIRED MAPPING: api/LineItems/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteLineItem(int id)
         {
@@ -156,7 +155,7 @@ namespace PrsWeb.Controllers
             return NoContent();
         }
 
-        //Get all line items for a request TR 4
+        //Get all line items for a request TR 4          REQUIRED MAPPING: api/LineItems/lines-for-req/{reqId}
         [HttpGet("lines-for-req/{requestId}")]
         public async Task<ActionResult<IEnumerable<LineItem>>>
     GetLineItemsForRequestId(int requestId)
@@ -175,9 +174,5 @@ namespace PrsWeb.Controllers
             return _context.LineItems.Any(e => e.Id == id);
         }
 
-
-       
-
-
-}
+    }
 }
