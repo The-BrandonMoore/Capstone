@@ -1,14 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\repos\\maximum-bc-20240819\\Capstone-Repos\\PrsWeb\\",
+  "WorkspaceRootPath": "C:\\repos\\maximum-bc-20240819\\Capstone-Repos\\CapstoneC-SharpFiles\\PrsWeb\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1B6D9CD9-C58E-4983-AE14-9A20F50CC54B}|PrsWeb\\PrsWeb.csproj|c:\\repos\\maximum-bc-20240819\\capstone-repos\\prsweb\\prsweb\\controllers\\requestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1B6D9CD9-C58E-4983-AE14-9A20F50CC54B}|PrsWeb\\PrsWeb.csproj|solutionrelative:prsweb\\controllers\\requestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1B6D9CD9-C58E-4983-AE14-9A20F50CC54B}|PrsWeb\\PrsWeb.csproj|c:\\repos\\maximum-bc-20240819\\capstone-repos\\prsweb\\prsweb\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1B6D9CD9-C58E-4983-AE14-9A20F50CC54B}|PrsWeb\\PrsWeb.csproj|solutionrelative:prsweb\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1B6D9CD9-C58E-4983-AE14-9A20F50CC54B}|PrsWeb\\PrsWeb.csproj|c:\\repos\\maximum-bc-20240819\\capstone-repos\\capstonec-sharpfiles\\prsweb\\prsweb\\controllers\\lineitemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1B6D9CD9-C58E-4983-AE14-9A20F50CC54B}|PrsWeb\\PrsWeb.csproj|solutionrelative:prsweb\\controllers\\lineitemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,27 +27,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "RequestsController.cs",
-              "DocumentMoniker": "C:\\repos\\maximum-bc-20240819\\Capstone-Repos\\PrsWeb\\PrsWeb\\Controllers\\RequestsController.cs",
-              "RelativeDocumentMoniker": "PrsWeb\\Controllers\\RequestsController.cs",
-              "ToolTip": "C:\\repos\\maximum-bc-20240819\\Capstone-Repos\\PrsWeb\\PrsWeb\\Controllers\\RequestsController.cs",
-              "RelativeToolTip": "PrsWeb\\Controllers\\RequestsController.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "Title": "LineItemsController.cs",
+              "DocumentMoniker": "C:\\repos\\maximum-bc-20240819\\Capstone-Repos\\CapstoneC-SharpFiles\\PrsWeb\\PrsWeb\\Controllers\\LineItemsController.cs",
+              "RelativeDocumentMoniker": "PrsWeb\\Controllers\\LineItemsController.cs",
+              "ToolTip": "C:\\repos\\maximum-bc-20240819\\Capstone-Repos\\CapstoneC-SharpFiles\\PrsWeb\\PrsWeb\\Controllers\\LineItemsController.cs",
+              "RelativeToolTip": "PrsWeb\\Controllers\\LineItemsController.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-27T19:32:52.098Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "C:\\repos\\maximum-bc-20240819\\Capstone-Repos\\PrsWeb\\PrsWeb\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "PrsWeb\\Controllers\\UsersController.cs",
-              "ToolTip": "C:\\repos\\maximum-bc-20240819\\Capstone-Repos\\PrsWeb\\PrsWeb\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "PrsWeb\\Controllers\\UsersController.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-27T19:17:53.976Z",
+              "WhenOpened": "2024-09-30T13:26:59.362Z",
               "EditorCaption": ""
             }
           ]

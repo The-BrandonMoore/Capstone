@@ -170,14 +170,13 @@ namespace PrsWeb.Controllers
 
         //Request Rejected TR12      REQUIRED MAPPING: api/Requests/reject/{id}
         [HttpPut("reject/{id}")]
-        public async Task<ActionResult<Request>> RequestDenied(int id, object reasonForRejection)
+        public async Task<ActionResult<Request>> RequestDenied(int id, RequestRejected requestRejected)
         {
             var result = await GetRequest(id);
             Request request = result.Value;
             _context.Entry(request).State = EntityState.Modified;
             request.Status = "REJECTED";
-            string reason = System.Text.Json.JsonSerializer.Serialize(reasonForRejection);
-            request.ReasonForRejection = reason;
+            request.ReasonForRejection = requestRejected.ReasonForRejection;
             await _context.SaveChangesAsync();
             return request;
         }

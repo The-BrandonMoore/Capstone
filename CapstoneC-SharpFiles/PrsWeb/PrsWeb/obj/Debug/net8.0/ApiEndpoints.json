@@ -423,8 +423,8 @@
         "IsRequired": true
       },
       {
-        "Name": "reasonForRejection",
-        "Type": "System.Object",
+        "Name": "requestRejected",
+        "Type": "PrsWeb.Models.RequestRejected",
         "IsRequired": true
       }
     ],

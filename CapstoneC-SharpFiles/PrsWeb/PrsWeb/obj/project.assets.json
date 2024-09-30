@@ -7722,11 +7722,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\repos\\maximum-bc-20240819\\Capstone-Repos\\PrsWeb\\PrsWeb\\PrsWeb.csproj",
+      "projectUniqueName": "C:\\repos\\maximum-bc-20240819\\Capstone-Repos\\CapstoneC-SharpFiles\\PrsWeb\\PrsWeb\\PrsWeb.csproj",
       "projectName": "PrsWeb",
-      "projectPath": "C:\\repos\\maximum-bc-20240819\\Capstone-Repos\\PrsWeb\\PrsWeb\\PrsWeb.csproj",
+      "projectPath": "C:\\repos\\maximum-bc-20240819\\Capstone-Repos\\CapstoneC-SharpFiles\\PrsWeb\\PrsWeb\\PrsWeb.csproj",
       "packagesPath": "C:\\Users\\max-student\\.nuget\\packages\\",
-      "outputPath": "C:\\repos\\maximum-bc-20240819\\Capstone-Repos\\PrsWeb\\PrsWeb\\obj\\",
+      "outputPath": "C:\\repos\\maximum-bc-20240819\\Capstone-Repos\\CapstoneC-SharpFiles\\PrsWeb\\PrsWeb\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\max-student\\AppData\\Roaming\\NuGet\\NuGet.Config",
