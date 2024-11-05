@@ -1,0 +1,97 @@
+<h1>{{ title }}</h1>
+<a routerLink="/vendor-list">Return to List</a>
+<div>
+  <table>
+    <tbody>
+      <tr>
+        <td>Code:</td>
+        <td>
+          <input
+            [(ngModel)]="newVendor.code"
+            type="text"
+            placeholder="Enter Vendor Code"
+            required
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Name:</td>
+        <td>
+          <input
+            [(ngModel)]="newVendor.name"
+            type="text"
+            placeholder="Enter Vendor Name"
+            required
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Address:</td>
+        <td>
+          <input
+            [(ngModel)]="newVendor.address"
+            type="text"
+            placeholder="Enter Vendor Address"
+            required
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>City:</td>
+        <td>
+          <input
+            [(ngModel)]="newVendor.city"
+            type="text"
+            placeholder="Enter Vendor City"
+            required
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>State:</td>
+        <td>
+          <input
+            [(ngModel)]="newVendor.state"
+            type="text"
+            placeholder="Enter Vendor State"
+            required
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Zip:</td>
+        <td>
+          <input
+            [(ngModel)]="newVendor.zip"
+            type="text"
+            placeholder="Enter Vendor Zip"
+            required
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Phone Number:</td>
+        <td>
+          <input
+            [(ngModel)]="newVendor.phoneNumber"
+            type="text"
+            placeholder="Enter Vendor Phone Number"
+            required
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Email:</td>
+        <td>
+          <input
+            [(ngModel)]="newVendor.email"
+            type="text"
+            placeholder="Enter Vendor Email"
+            required
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="button" (click)="addVendor()">Add Vendor</button>
+</div>

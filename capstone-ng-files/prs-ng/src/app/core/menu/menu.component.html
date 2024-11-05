@@ -1,0 +1,13 @@
+<nav>
+  <!-- <img
+      src="../../../../Users/preac/Pictures/Bootcamp Photos/PawneeCityLogo.png"
+      alt="Logo for the city of Pawnee, Indiana"
+      height="50px"
+      width="50px"
+    /> -->
+  <ul>
+    <li *ngFor="let mi of menuItems" title="{{ mi.tooltip }}">
+      <a routerLink="{{ mi.href }}">{{ mi.display }}</a>
+    </li>
+  </ul>
+</nav>

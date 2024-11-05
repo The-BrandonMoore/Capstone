@@ -1,0 +1,11 @@
+img {
+  background-color: transparent;
+  width: 60%;
+  height: 60%;
+  margin: auto;
+}
+div {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}

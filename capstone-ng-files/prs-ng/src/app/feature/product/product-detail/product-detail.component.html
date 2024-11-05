@@ -1,0 +1,84 @@
+<h1>{{ title }}</h1>
+<a routerLink="/product-list">Return to List</a>
+<div>
+  <table class="table table-striped" *ngIf="product">
+    <tr>
+      <td>ID</td>
+      <td>
+        <input [(ngModel)]="product.id" type="text" title="ID" disabled />
+      </td>
+    </tr>
+    <tr>
+      <td>Vendor</td>
+      <td>
+        <input
+          [(ngModel)]="product.vendor.name"
+          type="text"
+          title="Vendor Name"
+          disabled
+        />
+      </td>
+    </tr>
+    <tr>
+      <td>Part Number</td>
+      <td>
+        <input
+          [(ngModel)]="product.partNumber"
+          type="text"
+          title="Part Number"
+          disabled
+        />
+      </td>
+    </tr>
+    <tr>
+      <td>Name</td>
+      <td>
+        <input
+          [(ngModel)]="product.name"
+          type="text"
+          title="product name"
+          disabled
+        />
+      </td>
+    </tr>
+    <tr>
+      <td>Price</td>
+      <td>
+        <input
+          [(ngModel)]="product.price"
+          type="text"
+          title="product price"
+          disabled
+        />
+      </td>
+    </tr>
+    <tr>
+      <td>Unit</td>
+      <td>
+        <input [(ngModel)]="product.unit" type="text" title="unit" disabled />
+      </td>
+    </tr>
+    <tr>
+      <td>Photo Path</td>
+      <td>
+        <input
+          [(ngModel)]="product.photoPath"
+          type="text"
+          title="photo path"
+          disabled
+        />
+      </td>
+    </tr>
+
+    <td id="button">
+      <button class="button" routerLink="/product-edit/{{ product.id }}">
+        Edit Product
+      </button>
+
+      |
+      <button (click)="delete()" class="btn btn-sm btn-danger">
+        Delete Product
+      </button>
+    </td>
+  </table>
+</div>

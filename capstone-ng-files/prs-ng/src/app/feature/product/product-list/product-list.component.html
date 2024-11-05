@@ -1,0 +1,59 @@
+<h1>{{ title }}</h1>
+<div id="product-create">
+  <p>New Product</p>
+  <a routerLink="/product-create">
+    <img width="20" height="20" src="./assets/add-icon.png" title="Add New" />
+  </a>
+</div>
+<div>
+  <table class="table table-hover table-striped">
+    <thead>
+      <th>ID</th>
+      <th>Vendor</th>
+      <th>Part Number</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Unit</th>
+      <th>Photo Path</th>
+      <th>Line Items</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of productList">
+        <td>{{ p.id }}</td>
+        <td>{{ p.vendor.name }}</td>
+        <td>{{ p.partNumber }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.price }}</td>
+        <td>{{ p.unit }}</td>
+        <td>{{ p.photoPath }}</td>
+        <td>{{ p.lineItems }}</td>
+        <td>
+          <img
+            src="./assets/delete.jpg"
+            width="20"
+            height="20"
+            alt="delete button"
+            (click)="delete(p.id)"
+            class="button"
+          />
+          <img
+            routerLink="/product-edit/{{ p.id }}"
+            src="./assets/pencil-icon.png"
+            width="20"
+            height="20"
+            alt="edit button"
+            class="button"
+          />
+          <img
+            routerLink="/product-detail/{{ p.id }}"
+            src="./assets/details.png"
+            width="20"
+            height="20"
+            alt="details button"
+            class="button"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

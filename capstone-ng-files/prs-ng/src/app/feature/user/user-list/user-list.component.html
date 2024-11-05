@@ -1,0 +1,70 @@
+<h1>{{ title }}</h1>
+<div>
+  <div id="user-create">
+    <p>New User</p>
+    <a routerLink="/user-create">
+      <img width="20" height="20" src="./assets/add-icon.png" title="Add New" />
+    </a>
+  </div>
+  <table class="table table-hover table-striped">
+    <thead>
+      <th>ID</th>
+      <th>Username</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone Number</th>
+      <th>Email</th>
+      <th>Reviewer</th>
+      <th>Admin</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let u of userList">
+        <td>{{ u.id }}</td>
+        <td>{{ u.username }}</td>
+        <td>{{ u.firstName }}</td>
+        <td>{{ u.lastName }}</td>
+        <td>{{ u.phoneNumber }}</td>
+        <td>{{ u.email }}</td>
+        <td>
+          <input
+            type="checkbox"
+            title="reviewer"
+            [checked]="u.reviewer"
+            disabled
+          />
+        </td>
+        <td>
+          <input type="checkbox" title="admin" [checked]="u.admin" disabled />
+        </td>
+        <td>
+          <a>
+            <img
+              src="./assets/delete.jpg"
+              width="20"
+              height="20"
+              alt="delete button"
+              class="button"
+              (click)="delete(u.id)"
+          /></a>
+          <a routerLink="/user-edit/{{ u.id }}"
+            ><img
+              src="./assets/pencil-icon.png"
+              width="20"
+              height="20"
+              alt="edit button"
+              class="button"
+          /></a>
+          <a routerLink="/user-detail/{{ u.id }}"
+            ><img
+              src="./assets/details.png"
+              width="20"
+              height="20"
+              alt="details button"
+              class="button"
+          /></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

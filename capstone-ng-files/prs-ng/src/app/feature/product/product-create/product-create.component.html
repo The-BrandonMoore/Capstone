@@ -1,0 +1,77 @@
+<h1>{{ title }}</h1>
+<a routerLink="/product-list">Return to List</a>
+<div>
+  <table class="table table-striped" *ngIf="newProduct">
+    <tr>
+      <td>Vendor</td>
+      <td>
+        <select
+          [(ngModel)]="newProduct.vendor"
+          class="rounded"
+          title="vendors"
+          required
+        >
+          <option value="" disabled selected>Select Vendor</option>
+          <option *ngFor="let v of vendors" [ngValue]="v">
+            {{ "ID: " + v.id + " - " + v.name }}
+          </option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Part Number</td>
+      <td>
+        <input
+          [(ngModel)]="newProduct.partNumber"
+          type="text"
+          title="Part Number"
+          required
+        />
+      </td>
+    </tr>
+    <tr>
+      <td>Name</td>
+      <td>
+        <input
+          [(ngModel)]="newProduct.name"
+          type="text"
+          title="product name"
+          required
+        />
+      </td>
+    </tr>
+    <tr>
+      <td>Price</td>
+      <td>
+        <input
+          [(ngModel)]="newProduct.price"
+          type="text"
+          title="product price"
+          required
+        />
+      </td>
+    </tr>
+    <tr>
+      <td>Unit</td>
+      <td>
+        <input [(ngModel)]="newProduct.unit" type="text" title="unit" />
+      </td>
+    </tr>
+    <tr>
+      <td>Photo Path</td>
+      <td>
+        <input
+          [(ngModel)]="newProduct.photoPath"
+          type="text"
+          title="photo path"
+        />
+      </td>
+    </tr>
+
+    <td id="button">
+      <button (click)="addProduct()" class="btn btn-sm btn-danger">
+        Create Product
+      </button>
+    </td>
+  </table>
+</div>
