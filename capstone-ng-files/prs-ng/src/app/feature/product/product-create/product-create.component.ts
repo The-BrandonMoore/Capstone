@@ -5,6 +5,7 @@ import { Product } from '../../../model/product.class';
 import { ProductService } from '../../../service/product.service';
 import { Vendor } from '../../../model/vendor.class';
 import { VendorService } from '../../../service/vendor.service';
+import { SystemService } from '../../../service/system.service';
 
 @Component({
   selector: 'app-product-create',
@@ -16,14 +17,22 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
   newProduct: Product = new Product();
   subscription!: Subscription;
   vendors: Vendor[] = [];
+  welcomeName: string = '';
+  loggedUserName: string = '';
 
   constructor(
     private productSvc: ProductService,
     private router: Router,
-    private vendorSvc: VendorService
+    private vendorSvc: VendorService,
+    private sysSvc: SystemService
   ) {}
 
   ngOnInit(): void {
+    this.welcomeName = this.sysSvc.loggedInUser.firstName;
+    this.loggedUserName =
+      this.sysSvc.loggedInUser.firstName +
+      ' ' +
+      this.sysSvc.loggedInUser.lastName;
     this.subscription = this.vendorSvc.list().subscribe({
       next: (resp) => {
         this.vendors = resp;

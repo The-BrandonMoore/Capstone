@@ -9,7 +9,7 @@ export class Product {
   price: number;
   unit: string;
   photoPath: string;
-  lineItems: LineItem;
+  //lineItems: LineItem;
   vendor: Vendor;
 
   constructor(
@@ -20,7 +20,7 @@ export class Product {
     price: number = 0.0,
     unit: string = '',
     photoPath: string = '',
-    lineItems: LineItem = new LineItem(),
+    //lineItems: LineItem = new LineItem(),
     vendor: Vendor = new Vendor()
   ) {
     this.id = id;
@@ -30,7 +30,7 @@ export class Product {
     this.price = price;
     this.unit = unit;
     this.photoPath = photoPath;
-    this.lineItems = lineItems;
+    // this.lineItems = lineItems;
     this.vendor = vendor;
   }
 }

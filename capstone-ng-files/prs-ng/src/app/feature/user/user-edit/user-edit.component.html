@@ -1,7 +1,12 @@
-<h1>{{ title }}</h1>
-<a routerLink="/user-list">Return to List</a>
-<div>
-  <table class="table table-striped" *ngIf="user">
+<app-menu></app-menu>
+<div class="p-4">
+  <h1>{{ title }}</h1>
+  <div>
+    <a class="returnToList" routerLink="/user-list">Return to List</a>
+    <p class="welcome-message">Welcome {{ welcomeName }}!</p>
+  </div>
+
+  <table id="table" class="table table-hover table-striped" *ngIf="user">
     <tr>
       <td>ID</td>
       <td>

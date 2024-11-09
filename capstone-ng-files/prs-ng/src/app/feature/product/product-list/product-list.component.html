@@ -1,3 +1,4 @@
+<app-menu></app-menu>
 <h1>{{ title }}</h1>
 <div id="product-create">
   <p>New Product</p>
@@ -5,6 +6,7 @@
     <img width="20" height="20" src="./assets/add-icon.png" title="Add New" />
   </a>
 </div>
+Welcome {{ loggedUserName }}!
 <div>
   <table class="table table-hover table-striped">
     <thead>
@@ -15,7 +17,6 @@
       <th>Price</th>
       <th>Unit</th>
       <th>Photo Path</th>
-      <th>Line Items</th>
     </thead>
     <tbody>
       <tr *ngFor="let p of productList">
@@ -26,7 +27,6 @@
         <td>{{ p.price }}</td>
         <td>{{ p.unit }}</td>
         <td>{{ p.photoPath }}</td>
-        <td>{{ p.lineItems }}</td>
         <td>
           <img
             src="./assets/delete.jpg"

@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Product } from '../../../model/product.class';
 import { ProductService } from '../../../service/product.service';
+import { SystemService } from '../../../service/system.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -14,14 +15,22 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   productId!: number;
   product!: Product;
   subscription!: Subscription;
+  welcomeName: string = '';
+  loggedUserName: string = '';
 
   constructor(
     private router: Router,
     private productSvc: ProductService,
-    private actRoute: ActivatedRoute
+    private actRoute: ActivatedRoute,
+    private sysSvc: SystemService
   ) {}
 
   ngOnInit(): void {
+    this.welcomeName = this.sysSvc.loggedInUser.firstName;
+    this.loggedUserName =
+      this.sysSvc.loggedInUser.firstName +
+      ' ' +
+      this.sysSvc.loggedInUser.lastName;
     this.actRoute.params.subscribe((parms) => {
       this.productId = +parms['id']; // The '+' ensures it's parsed as a number
       this.subscription = this.productSvc.getById(this.productId).subscribe({

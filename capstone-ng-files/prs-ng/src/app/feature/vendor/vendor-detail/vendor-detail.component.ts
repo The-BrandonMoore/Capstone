@@ -3,6 +3,7 @@ import { Vendor } from '../../../model/vendor.class';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { VendorService } from '../../../service/vendor.service';
+import { SystemService } from '../../../service/system.service';
 
 @Component({
   selector: 'app-vendor-detail',
@@ -14,14 +15,22 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
   vendorId!: number;
   vendor!: Vendor;
   subscription!: Subscription;
+  welcomeName: string = '';
+  loggedUserName: string = '';
 
   constructor(
     private router: Router,
     private vendorSvc: VendorService,
-    private actRoute: ActivatedRoute
+    private actRoute: ActivatedRoute,
+    private sysSvc: SystemService
   ) {}
 
   ngOnInit(): void {
+    this.welcomeName = this.sysSvc.loggedInUser.firstName;
+    this.loggedUserName =
+      this.sysSvc.loggedInUser.firstName +
+      ' ' +
+      this.sysSvc.loggedInUser.lastName;
     this.actRoute.params.subscribe((parms) => {
       this.vendorId = +parms['id']; // The '+' ensures it's parsed as a number
       this.subscription = this.vendorSvc.getById(this.vendorId).subscribe({

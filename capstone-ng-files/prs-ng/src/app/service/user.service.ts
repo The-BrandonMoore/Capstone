@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../model/user.class';
+import { UserLogin } from '../model/user-login.class';
 
 const URL = 'http://localhost:5091/api/Users';
 @Injectable({
@@ -9,6 +10,10 @@ const URL = 'http://localhost:5091/api/Users';
 })
 export class UserService {
   constructor(private http: HttpClient) {}
+
+  login(userLogin: UserLogin): Observable<User> {
+    return this.http.post(URL + '/login', userLogin) as Observable<User>;
+  }
 
   list(): Observable<User[]> {
     return this.http.get(URL) as Observable<User[]>;

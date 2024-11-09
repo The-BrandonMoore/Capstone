@@ -1,0 +1,54 @@
+<app-menu></app-menu>
+<h1>{{ title }}</h1>
+<div id="request-list">
+  <p>Request Details</p>
+</div>
+<a [routerLink]="['/request-lineitem/', lineitem.requestId]">Return to List</a>
+
+Welcome {{ loggedUserName }}!
+
+<div class="p-4">
+  <table class="table table-sm table-hover table-striped" *ngIf="lineitem">
+    <tbody>
+      <tr>
+        <td>
+          Product:
+          <select
+            [(ngModel)]="lineitem.productId"
+            title="product"
+            class="rounded"
+          >
+            <option value="" selected disabled>Select Product</option>
+            <option *ngFor="let p of products" [ngValue]="p.id">
+              {{ p.name }}
+            </option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Quantity:
+          <input
+            [(ngModel)]="lineitem.quantity"
+            type="number"
+            title="quantity"
+            class="rounded"
+            required
+          />
+        </td>
+      </tr>
+
+      <tr>
+        <td id="button">
+          <button class="btn btn-primary" (click)="save()">
+            Save LineItem
+          </button>
+          |
+          <button (click)="delete()" class="btn btn-sm btn-danger">
+            Delete Request
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

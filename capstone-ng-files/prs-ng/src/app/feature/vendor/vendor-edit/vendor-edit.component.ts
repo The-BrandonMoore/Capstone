@@ -3,6 +3,7 @@ import { Vendor } from '../../../model/vendor.class';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { VendorService } from '../../../service/vendor.service';
+import { SystemService } from '../../../service/system.service';
 
 @Component({
   selector: 'app-vendor-edit',
@@ -66,14 +67,22 @@ export class VendorEditComponent implements OnInit, OnDestroy {
     'WI',
     'WY',
   ];
+  welcomeName: string = '';
+  loggedUserName: string = '';
 
   constructor(
     private router: Router,
     private vendorSvc: VendorService,
-    private actRoute: ActivatedRoute
+    private actRoute: ActivatedRoute,
+    private sysSvc: SystemService
   ) {}
 
   ngOnInit(): void {
+    this.welcomeName = this.sysSvc.loggedInUser.firstName;
+    this.loggedUserName =
+      this.sysSvc.loggedInUser.firstName +
+      ' ' +
+      this.sysSvc.loggedInUser.lastName;
     // get id from the url
     this.actRoute.params.subscribe((parms) => {
       this.vendorId = parms['id'];
@@ -97,6 +106,17 @@ export class VendorEditComponent implements OnInit, OnDestroy {
       },
       error: (err) => {
         console.error('Error updating vendor:', err);
+      },
+    });
+  }
+  delete(): void {
+    this.subscription = this.vendorSvc.delete(this.vendorId).subscribe({
+      next: (resp) => {
+        this.vendor = resp as Vendor;
+        this.router.navigateByUrl('/vendor-list');
+      },
+      error: (err) => {
+        console.log(err);
       },
     });
   }

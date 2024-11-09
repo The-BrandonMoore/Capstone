@@ -1,0 +1,74 @@
+<app-menu></app-menu>
+<h1>{{ title }}</h1>
+<div id="request-list">
+  <p>Request Details</p>
+</div>
+<a routerLink="/request-list">Return to List</a>
+Welcome {{ loggedUserName }}!
+<div class="p-4">
+  <table *ngIf="request" class="table table-sm table-striped">
+    <thead>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Total</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ reqUserFName }} {{ reqUserLName }}</td>
+        <td>{{ request.description }}</td>
+        <td>{{ request.status }}</td>
+        <td>{{ request.total }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div [ngSwitch]="lineitems?.length" class="p-4">
+  <section class="heading">
+    <span class="page-title font-weight-bold font-italic"> [Line Items] </span>
+    <a routerLink="/lineitem-create/{{ request?.id }}">
+      <img width="20" height="20" src="./assets/add-icon.png" title="Add New" />
+    </a>
+  </section>
+  <!--  This is the LIne Items Table  -->
+
+  <table class="table table-sm table-striped">
+    <thead>
+      <tr>
+        <th>Vendor</th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>LineTotal</th>
+      </tr>
+    </thead>
+    <p *ngSwitchCase="0">No line items yet. Please create a new one.</p>
+    <tbody *ngSwitchDefault>
+      <tr *ngFor="let lineitem of lineitems">
+        <td *ngIf="lineitem.product?.vendor">
+          {{ lineitem.product.vendor.name }}
+        </td>
+        <td>{{ lineitem.product.name }}</td>
+        <td>{{ lineitem.quantity }}</td>
+        <td>{{ lineitem.product.price }}</td>
+        <td>{{ lineitem.quantity * lineitem.product.price }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="p-4" *ngIf="request">
+    <button type="button" class="btn btn-success" (click)="approve()">
+      Approve
+    </button>
+    &nbsp;&nbsp;
+    <input
+      [(ngModel)]="request.reasonForRejection"
+      type="text"
+      placeholder="Reason for Rejection"
+    />
+    &nbsp;&nbsp;
+    <button type="button" class="btn btn-danger" (click)="reject()">
+      Reject
+    </button>
+  </div>
+</div>
