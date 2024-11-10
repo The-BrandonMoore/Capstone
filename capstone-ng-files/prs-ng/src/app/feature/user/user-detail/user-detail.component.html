@@ -1,94 +1,101 @@
 <app-menu></app-menu>
-<h1>{{ title }}</h1>
-<a routerLink="/user-list">Return to List</a>
-Welcome {{ loggedUserName }}!
-<div>
-  <table class="table table-striped" *ngIf="user">
-    <tr>
-      <td>ID</td>
-      <td>
-        <input [(ngModel)]="user.id" type="text" title="ID" disabled />
-      </td>
-    </tr>
-    <tr>
-      <td>Username</td>
-      <td>
-        <input [(ngModel)]="user.username" type="text" title="Code" disabled />
-      </td>
-    </tr>
-    <tr>
-      <td>First Name</td>
-      <td>
-        <input
-          [(ngModel)]="user.firstName"
-          type="text"
-          title="first name"
-          disabled
-        />
-      </td>
-    </tr>
-    <tr>
-      <td>Last Name</td>
-      <td>
-        <input
-          [(ngModel)]="user.lastName"
-          type="text"
-          title="last name"
-          disabled
-        />
-      </td>
-    </tr>
-    <tr>
-      <td>Phone Number</td>
-      <td>
-        <input
-          [(ngModel)]="user.phoneNumber"
-          type="text"
-          title="user phone"
-          disabled
-        />
-      </td>
-    </tr>
-    <tr>
-      <td>Email</td>
-      <td>
-        <input [(ngModel)]="user.email" type="text" title="email" disabled />
-      </td>
-    </tr>
-    <tr>
-      <td>Reviewer</td>
-      <td>
-        <input
-          [(ngModel)]="user.reviewer"
-          type="checkbox"
-          title="reviewer"
-          unchecked
-          disabled
-        />
-      </td>
-    </tr>
-    <tr>
-      <td>Admin</td>
-      <td>
-        <input
-          [(ngModel)]="user.admin"
-          type="checkbox"
-          title="admin"
-          unchecked
-          disabled
-        />
-      </td>
-    </tr>
+<div class="p-4">
+  <h1>{{ title }}</h1>
+  <a routerLink="/user-list">Return to List</a>
+  <p class="welcome-message">Welcome {{ welcomeName }}!</p>
+  <div>
+    <table id="table" class="table table-hover table-striped" *ngIf="user">
+      <tr>
+        <td>ID</td>
+        <td>
+          <input [(ngModel)]="user.id" type="text" title="ID" disabled />
+        </td>
+      </tr>
+      <tr>
+        <td>Username</td>
+        <td>
+          <input
+            [(ngModel)]="user.username"
+            type="text"
+            title="Code"
+            disabled
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>First Name</td>
+        <td>
+          <input
+            [(ngModel)]="user.firstName"
+            type="text"
+            title="first name"
+            disabled
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Last Name</td>
+        <td>
+          <input
+            [(ngModel)]="user.lastName"
+            type="text"
+            title="last name"
+            disabled
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Phone Number</td>
+        <td>
+          <input
+            [(ngModel)]="user.phoneNumber"
+            type="text"
+            title="user phone"
+            disabled
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>
+          <input [(ngModel)]="user.email" type="text" title="email" disabled />
+        </td>
+      </tr>
+      <tr>
+        <td>Reviewer</td>
+        <td>
+          <input
+            [(ngModel)]="user.reviewer"
+            type="checkbox"
+            title="reviewer"
+            unchecked
+            disabled
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Admin</td>
+        <td>
+          <input
+            [(ngModel)]="user.admin"
+            type="checkbox"
+            title="admin"
+            unchecked
+            disabled
+          />
+        </td>
+      </tr>
 
-    <td id="button">
-      <button class="button" routerLink="/user-edit/{{ user.id }}">
-        Edit User
-      </button>
+      <td id="button">
+        <button class="button" routerLink="/user-edit/{{ user.id }}">
+          Edit User
+        </button>
 
-      |
-      <button (click)="delete()" class="btn btn-sm btn-danger">
-        Delete User
-      </button>
-    </td>
-  </table>
+        |
+        <button (click)="delete()" class="btn btn-sm btn-danger">
+          Delete User
+        </button>
+      </td>
+    </table>
+  </div>
 </div>

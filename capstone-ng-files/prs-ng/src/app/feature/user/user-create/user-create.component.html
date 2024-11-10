@@ -1,101 +1,103 @@
 <app-menu></app-menu>
-<h1>{{ title }}</h1>
-<a routerLink="/user-list">Return to List</a>
-Welcome {{ loggedUserName }}!
-<div>
-  <table>
-    <tbody>
-      <tr>
-        <td>Username:</td>
-        <td>
-          <input
-            [(ngModel)]="newUser.username"
-            type="text"
-            placeholder="Enter Username"
-            required
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>Password:</td>
-        <td>
-          <input
-            [(ngModel)]="newUser.password"
-            type="text"
-            placeholder="Enter Password"
-            required
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>First Name:</td>
-        <td>
-          <input
-            [(ngModel)]="newUser.firstName"
-            type="text"
-            placeholder="Enter First Name"
-            required
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>Last Name:</td>
-        <td>
-          <input
-            [(ngModel)]="newUser.lastName"
-            type="text"
-            placeholder="Enter Last Name"
-            required
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>Phone Number:</td>
-        <td>
-          <input
-            [(ngModel)]="newUser.phoneNumber"
-            type="text"
-            placeholder="Enter Phone Number"
-            required
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>Email:</td>
-        <td>
-          <input
-            [(ngModel)]="newUser.email"
-            type="text"
-            placeholder="Enter Email"
-            required
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>Reviewer:</td>
-        <td>
-          <input
-            [(ngModel)]="newUser.reviewer"
-            type="checkbox"
-            title="reviewer"
-            unchecked
-            required
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>Admin:</td>
-        <td>
-          <input
-            [(ngModel)]="newUser.admin"
-            type="checkbox"
-            title="admin checkbox"
-            unchecked
-            required
-          />
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <button class="button" (click)="addUser()">Add User</button>
+<div class="p-4">
+  <h1>{{ title }}</h1>
+  <a routerLink="/user-list">Return to List</a>
+  <p class="welcome-message">Welcome {{ loggedUserName }}!</p>
+  <div>
+    <table id="table" class="table table-hover table-striped">
+      <tbody>
+        <tr>
+          <td>Username:</td>
+          <td>
+            <input
+              [(ngModel)]="newUser.username"
+              type="text"
+              placeholder="Enter Username"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Password:</td>
+          <td>
+            <input
+              [(ngModel)]="newUser.password"
+              type="text"
+              placeholder="Enter Password"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>First Name:</td>
+          <td>
+            <input
+              [(ngModel)]="newUser.firstName"
+              type="text"
+              placeholder="Enter First Name"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Last Name:</td>
+          <td>
+            <input
+              [(ngModel)]="newUser.lastName"
+              type="text"
+              placeholder="Enter Last Name"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Phone Number:</td>
+          <td>
+            <input
+              [(ngModel)]="newUser.phoneNumber"
+              type="text"
+              placeholder="Enter Phone Number"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td>
+            <input
+              [(ngModel)]="newUser.email"
+              type="text"
+              placeholder="Enter Email"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Reviewer:</td>
+          <td>
+            <input
+              [(ngModel)]="newUser.reviewer"
+              type="checkbox"
+              title="reviewer"
+              unchecked
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Admin:</td>
+          <td>
+            <input
+              [(ngModel)]="newUser.admin"
+              type="checkbox"
+              title="admin checkbox"
+              unchecked
+              required
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="button" (click)="addUser()">Add User</button>
+  </div>
 </div>
