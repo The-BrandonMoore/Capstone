@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 import { RequestService } from '../../../service/request.service';
 import { SystemService } from '../../../service/system.service';
 import { Request } from '../../../model/request.class';
+import { UserService } from '../../../service/user.service';
+import { User } from '../../../model/user.class';
 
 @Component({
   selector: 'app-request-detail',
@@ -17,10 +19,13 @@ export class RequestDetailComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   welcomeName: string = '';
   loggedUserName: string = '';
+  requestUse!: User;
+  user: string = '';
 
   constructor(
     private router: Router,
     private requestSvc: RequestService,
+    private userSvc: UserService,
     private actRoute: ActivatedRoute,
     private sysSvc: SystemService
   ) {}
@@ -36,6 +41,15 @@ export class RequestDetailComponent implements OnInit, OnDestroy {
       this.subscription = this.requestSvc.getById(this.requestId).subscribe({
         next: (resp) => {
           this.request = resp;
+          this.userSvc.getById(this.request.userId).subscribe({
+            next: (userResp) => {
+              this.requestUse = userResp;
+              this.user =
+                this.requestUse.firstName + ' ' + this.requestUse.lastName;
+            },
+          });
+          this.user =
+            this.request.user?.firstName + ' ' + this.request.user?.lastName;
         },
         error: (err) => {
           console.log('Error retrieving request: ', err);

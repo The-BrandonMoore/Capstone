@@ -53,12 +53,12 @@
         <tr>
           <td>State:</td>
           <td>
-            <input
-              [(ngModel)]="newVendor.state"
-              type="text"
-              placeholder="Enter Vendor State"
-              required
-            />
+            <select [(ngModel)]="newVendor.state" class="rounded" title="state">
+              <option value="" disabled>Select State</option>
+              <option *ngFor="let state of states" [ngValue]="state">
+                {{ state }}
+              </option>
+            </select>
           </td>
         </tr>
         <tr>

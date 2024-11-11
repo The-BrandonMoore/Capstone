@@ -15,3 +15,7 @@
 .plusButton {
   margin-left: 10px;
 }
+
+img {
+  display: inline-block;
+}

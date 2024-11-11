@@ -27,7 +27,7 @@
       <th>Action</th>
     </thead>
     <tbody>
-      <tr *ngFor="let u of userList">
+      <tr *ngFor="let u of userList" routerLink="/user-detail/{{ u.id }}">
         <td>{{ u.username }}</td>
         <td>{{ u.firstName }}</td>
         <td>{{ u.lastName }}</td>
@@ -42,7 +42,7 @@
           />
         </td>
         <td>
-          <input type="checkbox" title="admin" [checked]="u.admin" disabled />
+          <input type="checkbox" title="admin" disabled />
         </td>
         <td>
           <a>
