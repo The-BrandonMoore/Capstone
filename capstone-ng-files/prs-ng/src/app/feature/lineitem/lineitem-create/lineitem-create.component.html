@@ -1,31 +1,38 @@
 <app-menu></app-menu>
-<p>{{ title }} - Request ID: {{ requestId }}</p>
-<a [routerLink]="['/request-lineitem/', requestId]"> Return to List</a>
-<table>
-  <tr>
-    <td>
-      Product:
-      <select [(ngModel)]="newLineitem.productId" title="product">
-        <option value="" selected disabled>Select Product</option>
-        <option *ngFor="let p of products" [ngValue]="p.id">
-          {{ p.name }}
-        </option>
-      </select>
+<div class="p-4">
+  <div>
+    <p class="LIcreate">[{{ title }} - Request ID: {{ requestId }}]</p>
+    <a class="returnToList" [routerLink]="['/request-lineitem/', requestId]">
+      Return to List</a
+    >
+    <p class="welcome-message">Welcome {{ welcomeName }}!</p>
+  </div>
+  <table id="table" class="table table-hover talbe-stripe">
+    <tr>
+      <td>
+        Product:
+        <select [(ngModel)]="newLineitem.productId" title="product">
+          <option value="" selected disabled>Select Product</option>
+          <option *ngFor="let p of products" [ngValue]="p.id">
+            {{ p.name }}
+          </option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Quantity:
+        <input
+          [(ngModel)]="newLineitem.quantity"
+          type="number"
+          title="quantity"
+        />
+      </td>
+    </tr>
+    <td id="btn-sm">
+      <button type="button" class="btn btn-primary" (click)="add()">
+        Add Line Item
+      </button>
     </td>
-  </tr>
-  <tr>
-    <td>
-      Quantity:
-      <input
-        [(ngModel)]="newLineitem.quantity"
-        type="number"
-        title="quantity"
-      />
-    </td>
-  </tr>
-  <td id="btn-sm">
-    <button type="button" class="btn btn-primary" (click)="add()">
-      Add Line Item
-    </button>
-  </td>
-</table>
+  </table>
+</div>

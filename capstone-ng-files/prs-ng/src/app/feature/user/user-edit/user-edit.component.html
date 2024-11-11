@@ -84,12 +84,12 @@
     </tr>
 
     <td id="button">
-      <button class="button" (click)="editUser(user.id)">Save Changes</button>
+      <button type="button" class="btn btn-primary" (click)="editUser(user.id)">
+        Save Changes
+      </button>
 
       |
-      <button (click)="delete()" class="btn btn-sm btn-danger">
-        Delete User
-      </button>
+      <button (click)="delete()" class="btn btn-danger">Delete User</button>
     </td>
   </table>
 </div>

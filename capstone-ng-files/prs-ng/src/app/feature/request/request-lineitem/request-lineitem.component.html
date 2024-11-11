@@ -68,7 +68,7 @@
             alt="delete button"
             (click)="delete(lineitem.id)"
             class="button"
-          />
+          />&nbsp;
           <img
             routerLink="/lineitem-edit/{{ lineitem.id }}"
             src="./assets/pencil-icon.png"
@@ -83,7 +83,7 @@
   </table>
   <button
     *ngIf="request.total > 0 && loggedUserId == request.userId"
-    class="btn btn-primary btn-small"
+    class="btn btn-primary"
     (click)="submitForReview()"
   >
     Submit

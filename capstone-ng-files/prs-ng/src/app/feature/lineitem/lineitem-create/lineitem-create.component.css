@@ -1,0 +1,16 @@
+.LIcreate {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.returnToList {
+  display: inline;
+}
+.welcome-message {
+  display: inline;
+  float: right;
+}
+
+#table {
+  width: fit-content;
+}

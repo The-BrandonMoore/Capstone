@@ -1,78 +1,97 @@
 <app-menu></app-menu>
-<h1>{{ title }}</h1>
-<a routerLink="/vendor-list">Return to List</a>
-Welcome {{ loggedUserName }}!
-<div>
-  <table class="table table-striped" *ngIf="vendor">
-    <tr>
-      <td>ID</td>
-      <td>
-        <input [(ngModel)]="vendor.id" type="text" title="ID" disabled />
+<div class="p-4">
+  <h1>{{ title }}</h1>
+  <a routerLink="/vendor-list">Return to List</a>
+  <p class="welcome-message">Welcome {{ welcomeName }}!</p>
+  <div>
+    <table id="table" class="table table-hover table-striped" *ngIf="vendor">
+      <tr>
+        <td>ID</td>
+        <td>
+          <input [(ngModel)]="vendor.id" type="text" title="ID" disabled />
+        </td>
+      </tr>
+      <tr>
+        <td>Code</td>
+        <td>
+          <input [(ngModel)]="vendor.code" type="text" title="Code" disabled />
+        </td>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td>
+          <input [(ngModel)]="vendor.name" type="text" title="Name" disabled />
+        </td>
+      </tr>
+      <tr>
+        <td>Address</td>
+        <td>
+          <input
+            [(ngModel)]="vendor.address"
+            type="text"
+            title="address"
+            disabled
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>City</td>
+        <td>
+          <input [(ngModel)]="vendor.city" type="text" title="city" disabled />
+        </td>
+      </tr>
+      <tr>
+        <td>State</td>
+        <td>
+          <input
+            [(ngModel)]="vendor.state"
+            type="text"
+            title="state"
+            disabled
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Zip</td>
+        <td>
+          <input [(ngModel)]="vendor.zip" type="text" title="zip" disabled />
+        </td>
+      </tr>
+      <tr>
+        <td>Phone Number</td>
+        <td>
+          <input
+            [(ngModel)]="vendor.phoneNumber"
+            type="text"
+            title="phone"
+            disabled
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>
+          <input
+            [(ngModel)]="vendor.email"
+            type="text"
+            title="email"
+            disabled
+          />
+        </td>
+      </tr>
+      <td id="button">
+        <button
+          routerLink="/vendor-edit/{{ vendor.id }}"
+          type="button"
+          class="btn btn-primary"
+        >
+          Edit Vendor
+        </button>
+        |
+        <button (click)="delete()" type="button" class="btn btn-danger">
+          Delete Vendor
+        </button>
       </td>
-    </tr>
-    <tr>
-      <td>Code</td>
-      <td>
-        <input [(ngModel)]="vendor.code" type="text" title="Code" disabled />
-      </td>
-    </tr>
-    <tr>
-      <td>Name</td>
-      <td>
-        <input [(ngModel)]="vendor.name" type="text" title="Name" disabled />
-      </td>
-    </tr>
-    <tr>
-      <td>Address</td>
-      <td>
-        <input
-          [(ngModel)]="vendor.address"
-          type="text"
-          title="address"
-          disabled
-        />
-      </td>
-    </tr>
-    <tr>
-      <td>City</td>
-      <td>
-        <input [(ngModel)]="vendor.city" type="text" title="city" disabled />
-      </td>
-    </tr>
-    <tr>
-      <td>State</td>
-      <td>
-        <input [(ngModel)]="vendor.state" type="text" title="state" disabled />
-      </td>
-    </tr>
-    <tr>
-      <td>Zip</td>
-      <td>
-        <input [(ngModel)]="vendor.zip" type="text" title="zip" disabled />
-      </td>
-    </tr>
-    <tr>
-      <td>Phone Number</td>
-      <td>
-        <input
-          [(ngModel)]="vendor.phoneNumber"
-          type="text"
-          title="phone"
-          disabled
-        />
-      </td>
-    </tr>
-    <tr>
-      <td>Email</td>
-      <td>
-        <input [(ngModel)]="vendor.email" type="text" title="email" disabled />
-      </td>
-    </tr>
-    <td id="button">
-      <button routerLink="/vendor-edit/{{ vendor.id }}">Edit Vendor</button> |
-      <button (click)="delete()" class="btn btn-sm btn-danger">
-        Delete Vendor
-      </button>
-    </td>
-  </table>
+    </table>
+  </div>
 </div>

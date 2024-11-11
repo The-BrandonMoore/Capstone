@@ -1,0 +1,9 @@
+.request-review {
+  font-style: italic;
+  font-weight: bold;
+  display: inline;
+}
+.welcome-message {
+  float: right;
+  margin-right: 40px;
+}

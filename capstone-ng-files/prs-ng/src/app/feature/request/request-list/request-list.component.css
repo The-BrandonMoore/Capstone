@@ -1,4 +1,17 @@
+.welcome-message {
+  float: right;
+  display: inline;
+  margin-right: 40px;
+}
+
+.pageId {
+  display: inline;
+}
+
+.plusButton {
+  margin-left: 10px;
+}
+
 #a-links {
-  display: inline-block;
-  white-space: nowrap;
+  display: inline-flex;
 }

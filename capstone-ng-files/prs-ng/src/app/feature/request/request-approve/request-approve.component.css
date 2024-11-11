@@ -1,0 +1,10 @@
+.purchase-label {
+  font-style: italic;
+  font-weight: bold;
+  display: inline;
+  margin-right: 20px;
+}
+
+.welcome-message {
+  float: right;
+}

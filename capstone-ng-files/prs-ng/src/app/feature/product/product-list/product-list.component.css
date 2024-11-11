@@ -1,7 +1,14 @@
-#product-create {
-  display: inline-flex;
+.welcome-message {
+  float: right;
+  display: inline;
+  margin-right: 40px;
 }
 
-p {
-  margin-right: 10px;
+.pageId {
+  display: inline;
+}
+
+.plusButton {
+  margin-left: 10px;
+  display: inline;
 }

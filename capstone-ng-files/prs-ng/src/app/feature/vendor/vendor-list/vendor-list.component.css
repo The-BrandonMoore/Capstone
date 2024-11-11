@@ -2,6 +2,16 @@
   display: inline-flex;
 }
 
-p {
-  margin-right: 10px;
+.welcome-message {
+  float: right;
+  display: inline;
+  margin-right: 40px;
+}
+
+.pageId {
+  display: inline;
+}
+
+.plusButton {
+  margin-left: 10px;
 }

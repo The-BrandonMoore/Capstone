@@ -1,0 +1,13 @@
+.welcome-message {
+  float: right;
+  display: inline;
+  margin-right: 40px;
+}
+
+.plusButton {
+  margin-left: 10px;
+}
+
+#table {
+  width: fit-content;
+}
