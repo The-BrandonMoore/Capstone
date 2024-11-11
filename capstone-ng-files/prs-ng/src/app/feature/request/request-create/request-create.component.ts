@@ -18,7 +18,6 @@ export class RequestCreateComponent {
   welcomeName: string = '';
   loggedUserName: string = '';
   userId: number = 0;
-
   deliveryModeSelect: string[] = ['Standard', 'Pick-Up', 'Expedited'];
 
   constructor(

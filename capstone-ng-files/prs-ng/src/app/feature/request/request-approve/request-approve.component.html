@@ -10,6 +10,7 @@
       <table *ngIf="request" class="table table-sm table-striped">
         <thead>
           <th>Name</th>
+          <th>Request Number</th>
           <th>Description</th>
           <th>Status</th>
           <th>Total</th>
@@ -17,6 +18,7 @@
         <tbody>
           <tr>
             <td>{{ reqUserFName }} {{ reqUserLName }}</td>
+            <td>{{ request.requestNumber }}</td>
             <td>{{ request.description }}</td>
             <td>{{ request.status }}</td>
             <td>{{ request.total }}</td>

@@ -62,7 +62,7 @@
               rounded
             >
               <option value="" selected disabled>Select Delivery Mode</option>
-              <option *ngFor="let d of deliveryModeSelect" value="d">
+              <option *ngFor="let d of deliveryModeSelect" value="{{ d }}">
                 {{ d }}
               </option>
             </select>

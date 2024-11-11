@@ -25,7 +25,7 @@ import { LineitemCreateComponent } from './feature/lineitem/lineitem-create/line
 import { LineitemEditComponent } from './feature/lineitem/lineitem-edit/lineitem-edit.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/user-list', pathMatch: 'full' },
+  { path: '', redirectTo: '/user-login', pathMatch: 'full' },
   { path: 'user-list', component: UserListComponent },
   { path: 'user-create', component: UserCreateComponent },
   { path: 'user-edit/:id', component: UserEditComponent },
