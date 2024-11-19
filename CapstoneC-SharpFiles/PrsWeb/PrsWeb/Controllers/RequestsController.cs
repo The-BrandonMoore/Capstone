@@ -23,7 +23,9 @@ namespace PrsWeb.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Request>>> GetRequests()
         {
-            return await _context.Requests.ToListAsync();
+            return await _context.Requests.Include(r => r.User).ToListAsync();
+            //11/6/24 -- added .Include(r => r.User) to fix null user issue.
+
         }
 
         // GET: api/Requests/5     REQUIRED MAPPING: api/Requests/id
@@ -88,6 +90,7 @@ namespace PrsWeb.Controllers
                 Total = 0.0m
             };
 
+            nullifyAndSetId(request);
             //makes the new request number
             string lastRequest = _context.Requests.Max(r => r.RequestNumber);
             int lastFour = int.Parse(lastRequest.Substring(7)) + 1;
@@ -100,6 +103,18 @@ namespace PrsWeb.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetRequest", new { id = request.Id }, request);
+        }
+
+        private void nullifyAndSetId(Request request)
+        {
+            if (request.User != null)
+            {
+                if (request.UserId == 0)
+                {
+                    request.UserId = request.User.Id;
+                }
+                request.User = null;
+            }
         }
 
         // DELETE: api/Requests/5     REQUIRED MAPPING: api/Requests/id

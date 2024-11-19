@@ -89,6 +89,13 @@ namespace PrsWeb.Controllers
         [HttpPost]
         public async Task<ActionResult<LineItem>> PostLineItem(LineItem lineItem, int requestId)
         {
+           //changed 11/7/24
+            if (lineItem.RequestId == 0 && lineItem.Request != null)
+            {
+                lineItem.RequestId = lineItem.Request.Id;
+            }
+            lineItem.Request = null;
+            
             _context.LineItems.Add(lineItem);
             await _context.SaveChangesAsync();
 
@@ -111,6 +118,20 @@ namespace PrsWeb.Controllers
 
 
             return lineItem;
+        }
+
+
+        private void nullifyAndSetId(LineItem lineitem)//added this method 11/7/24
+        {
+            if (lineitem != null)
+            {
+                if (lineitem.RequestId == 0)
+                {
+                    lineitem.RequestId = lineitem.Request.Id;
+                }
+                lineitem.Request = null;
+              
+            }
         }
 
         // DELETE: api/LineItems/5          REQUIRED MAPPING: api/LineItems/{id}

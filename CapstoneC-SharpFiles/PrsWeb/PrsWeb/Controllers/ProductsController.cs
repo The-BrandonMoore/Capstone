@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PrsWeb.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace PrsWeb.Controllers
 {
@@ -19,14 +20,18 @@ namespace PrsWeb.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-            return await _context.Products.ToListAsync();
+            return await _context.Products
+                .Include(p => p.Vendor)
+                .ToListAsync();
         }
 
         // GET: api/Products/5     REQUIRED MAPPING: api/Products/id
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var product = await _context.Products
+                .Include (p => p.Vendor)
+                .FirstOrDefaultAsync(p => p.Id == id);
 
             if (product == null)
             {
@@ -72,11 +77,25 @@ namespace PrsWeb.Controllers
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
+            nullifyAndSetId(product);
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetProduct", new { id = product.Id }, product);
         }
+
+        private void nullifyAndSetId(Product product)
+        {
+            if (product.Vendor != null)
+            {
+                if(product.VendorId == 0)
+                {
+                    product.VendorId = product.Vendor.Id;
+                }
+                product.Vendor = null;
+            }
+        }
+
 
         // DELETE: api/Products/5    REQUIRED MAPPING: api/Products/id
         [HttpDelete("{id}")]

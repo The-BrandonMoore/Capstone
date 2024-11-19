@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace PrsWeb.Models;
@@ -43,6 +44,7 @@ public partial class User
 
     public bool Admin { get; set; }
 
+    [JsonIgnore]
     [InverseProperty("User")]
     public virtual ICollection<Request> Requests { get; set; } = new List<Request>();
 }
